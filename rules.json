@@ -1,0 +1,327 @@
+{
+  "version": "1.0.0",
+  "updated": "2024-12-03",
+  "rules": [
+    {
+      "id": "remove-greetings",
+      "name": "Remove Greetings",
+      "description": "Removes \"Hey there\", \"Hope you're well\" etc.",
+      "explanation": "Greetings waste tokens - AI doesn't need social pleasantries.",
+      "example": { "before": "Hey there! Hope you're having a great day!", "after": "" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 5,
+      "patterns": [
+        { "find": "^(hey|hi|hello|greetings)( there)?[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhope you'?r?e? (having|doing|feeling)[\\w\\s]*[!.]\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhope (this finds you well|all is well|you'?r?e? well)[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhave a (great|wonderful|nice|good|lovely) day[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bthanks (again|so much|a lot|in advance)[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bthank you (so much|very much|again|in advance)[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bsorry (for|about) the (long|lengthy) (message|email|text)[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bno pressure( though)?[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bonly if you want to[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\blet me know what you think[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwhen you get a chance[!.,]?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-please",
+      "name": "Remove Pleasantries",
+      "description": "Removes \"please\" from requests",
+      "explanation": "AI models respond equally well without \"please\" - saves tokens.",
+      "example": { "before": "Please write a poem", "after": "Write a poem" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 10,
+      "patterns": [
+        { "find": "\\bplease\\s+", "flags": "gi", "replace": "" },
+        { "find": ",?\\s*please[!.,]?$", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-polite-requests",
+      "name": "Remove Polite Phrases",
+      "description": "Removes \"could you\", \"would you\" etc.",
+      "explanation": "Direct commands work better than polite questions.",
+      "example": { "before": "Could you help me with...", "after": "Help me with..." },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 11,
+      "patterns": [
+        { "find": "\\bcould you (please\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bwould you (please\\s+)?(mind\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bcan you (please\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bwill you (please\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bmight you (be able to\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bif you (could|would|might)\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-appreciation",
+      "name": "Remove Appreciation Prefixes",
+      "description": "Removes \"I would appreciate...\"",
+      "explanation": "Appreciation adds tokens without affecting output quality.",
+      "example": { "before": "I would appreciate if you could explain...", "after": "Explain..." },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 12,
+      "patterns": [
+        { "find": "\\bI would (really\\s+)?appreciate (it\\s+)?if you could\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI('d| would) like (it\\s+)?if you could\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI was (kind of\\s+)?(maybe\\s+)?wondering if (you could|perhaps you might)\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI was wondering if\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bif you don't mind,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bif possible,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bif it's not too much trouble[,.]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwhen you (get|have) (a\\s+)?(chance|time),?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\band you have the time,?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-apologies",
+      "name": "Remove Apologies",
+      "description": "Removes unnecessary apologies",
+      "explanation": "Apologizing to AI wastes tokens.",
+      "example": { "before": "Sorry to bother you, but...", "after": "" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 13,
+      "patterns": [
+        { "find": "\\bI don't want to be a bother( or anything)?[,.]?\\s*(but\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bsorry to (bother|trouble|bug) you[,.]?\\s*(but\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bsorry (if this is|for being)[^.,!]*[.,!]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI (hope|don't want to) (this isn't|be)[^.,!]*[.,!]?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-fillers",
+      "name": "Remove Filler Words",
+      "description": "Removes \"just\", \"basically\", \"actually\"",
+      "explanation": "Filler words add no meaning and dilute clarity.",
+      "example": { "before": "I just really need you to basically help", "after": "I need you to help" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 15,
+      "patterns": [
+        { "find": "\\bjust\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bbasically,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bactually,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\breally\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bliterally\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bsimply\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bhonestly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bkind of\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bsort of\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\ba little (bit\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\babsolutely\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\banyway,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bso,\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-softeners",
+      "name": "Remove Softening Language",
+      "description": "Removes \"would be cool if\", \"it might be nice\"",
+      "explanation": "Softening language weakens requests.",
+      "example": { "before": "It would be cool if you could...", "after": "" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 16,
+      "patterns": [
+        { "find": "\\bit would be (really\\s+)?(cool|nice|great|awesome) if you could\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bit might be (nice|good|helpful) (if|to)\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI was thinking that (maybe,?\\s*)?", "flags": "gi", "replace": "" },
+        { "find": "\\bmaybe,?\\s*just\\s*maybe,?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-self-reference",
+      "name": "Remove Self-References",
+      "description": "Removes \"I want you to\", \"I need you to\"",
+      "explanation": "The AI knows you are asking. These phrases are redundant.",
+      "example": { "before": "I want you to write a story", "after": "Write a story" },
+      "enabled": true,
+      "category": "redundancy",
+      "priority": 20,
+      "patterns": [
+        { "find": "\\bI (want|need|would like|'d like) you to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI (want|need|am looking for)\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-redundant-phrases",
+      "name": "Remove Redundant Phrases",
+      "description": "Removes \"in order to\", \"due to the fact\"",
+      "explanation": "These phrases can be shortened without losing meaning.",
+      "example": { "before": "in order to achieve", "after": "to achieve" },
+      "enabled": true,
+      "category": "redundancy",
+      "priority": 25,
+      "patterns": [
+        { "find": "\\bin order to\\s+", "flags": "gi", "replace": "to " },
+        { "find": "\\bdue to the fact that\\s+", "flags": "gi", "replace": "because " },
+        { "find": "\\bfor the purpose of\\s+", "flags": "gi", "replace": "to " },
+        { "find": "\\bin the event that\\s+", "flags": "gi", "replace": "if " },
+        { "find": "\\bat this point in time\\b", "flags": "gi", "replace": "now" },
+        { "find": "\\bin the near future\\b", "flags": "gi", "replace": "soon" }
+      ]
+    },
+    {
+      "id": "simplify-verbose",
+      "name": "Simplify Verbose Phrases",
+      "description": "Simplifies wordy constructions",
+      "explanation": "Shorter phrases are clearer and save tokens.",
+      "example": { "before": "make sure that you", "after": "ensure" },
+      "enabled": true,
+      "category": "verbosity",
+      "priority": 31,
+      "patterns": [
+        { "find": "\\bmake sure (that\\s+)?(you\\s+)?", "flags": "gi", "replace": "ensure " },
+        { "find": "\\bprovide me with\\s+", "flags": "gi", "replace": "give " },
+        { "find": "\\btell me about\\s+", "flags": "gi", "replace": "explain " },
+        { "find": "\\blet me know\\s+", "flags": "gi", "replace": "tell me " },
+        { "find": "\\bgo ahead and\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bfeel free to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bdon't hesitate to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bany help you (might|may) (be able to\\s+)?provide[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhelp me out with something\\??\\s*", "flags": "gi", "replace": "help with: " },
+        { "find": "\\bpotentially\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bwriting some code for me\\??\\s*", "flags": "gi", "replace": "write code: " }
+      ]
+    },
+    {
+      "id": "remove-modifiers",
+      "name": "Remove Weak Modifiers",
+      "description": "Removes \"very\", \"extremely\"",
+      "explanation": "Weak modifiers often dilute meaning.",
+      "example": { "before": "very important", "after": "important" },
+      "enabled": true,
+      "category": "verbosity",
+      "priority": 32,
+      "patterns": [
+        { "find": "\\bvery\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bextremely\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bquite\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\brather\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bsomewhat\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-hedging",
+      "name": "Remove Hedging",
+      "description": "Removes \"I think\", \"maybe\", \"perhaps\"",
+      "explanation": "Hedging language makes prompts less clear.",
+      "example": { "before": "I think you should...", "after": "You should..." },
+      "enabled": true,
+      "category": "qualifiers",
+      "priority": 40,
+      "patterns": [
+        { "find": "\\bI think (that\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bI believe (that\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bperhaps\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bmaybe\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bpossibly\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bprobably\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-appearance",
+      "name": "Remove Appearance Phrases",
+      "description": "Removes \"it seems like\"",
+      "explanation": "These phrases express uncertainty. State things directly.",
+      "example": { "before": "It seems like you could...", "after": "You could..." },
+      "enabled": true,
+      "category": "qualifiers",
+      "priority": 41,
+      "patterns": [
+        { "find": "\\bit (seems|appears|looks) (like|as if|that)\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bseemingly\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bapparently\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "optimize-format-requests",
+      "name": "Optimize Format Requests",
+      "description": "Shortens format specifications",
+      "explanation": "Format requests can be shortened to direct commands.",
+      "example": { "before": "provide a detailed explanation of", "after": "explain in detail:" },
+      "enabled": true,
+      "category": "structure",
+      "priority": 50,
+      "patterns": [
+        { "find": "\\bprovide (me with\\s+)?a detailed explanation of\\s+", "flags": "gi", "replace": "explain in detail: " },
+        { "find": "\\bgive (me\\s+)?a summary of\\s+", "flags": "gi", "replace": "summarize: " },
+        { "find": "\\bwrite a comprehensive guide (on|about)\\s+", "flags": "gi", "replace": "guide: " },
+        { "find": "\\b(create|make|generate) a list of\\s+", "flags": "gi", "replace": "list: " }
+      ]
+    },
+    {
+      "id": "cleanup-whitespace",
+      "name": "Clean Whitespace",
+      "description": "Normalizes spaces",
+      "explanation": "Clean formatting helps AI parse your prompt correctly.",
+      "example": { "before": "Hello    world", "after": "Hello world" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 90,
+      "patterns": [
+        { "find": "\\s{2,}", "flags": "g", "replace": " " },
+        { "find": "^\\s+", "flags": "g", "replace": "" },
+        { "find": "\\s+$", "flags": "g", "replace": "" }
+      ]
+    },
+    {
+      "id": "fix-punctuation",
+      "name": "Fix Punctuation",
+      "description": "Fixes punctuation issues",
+      "explanation": "Clean punctuation improves clarity.",
+      "example": { "before": "Hello..  World", "after": "Hello. World" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 91,
+      "patterns": [
+        { "find": "\\s+([.,!?;:])", "flags": "g", "replace": "$1" },
+        { "find": "([.,!?;:])\\s*([.,!?;:])+", "flags": "g", "replace": "$1" },
+        { "find": "([.,!?;:])([A-Za-z])", "flags": "g", "replace": "$1 $2" }
+      ]
+    },
+    {
+      "id": "capitalize-first",
+      "name": "Capitalize First Letter",
+      "description": "Ensures proper capitalization",
+      "explanation": "Proper capitalization is standard formatting.",
+      "example": { "before": "write a poem", "after": "Write a poem" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 95,
+      "transformCode": "return text.charAt(0).toUpperCase() + text.slice(1);"
+    },
+    {
+      "id": "compress-articles",
+      "name": "Remove Articles",
+      "description": "Removes \"a\", \"an\", \"the\"",
+      "explanation": "Articles can be removed in prompts without losing meaning. Use carefully.",
+      "example": { "before": "Write a poem about the moon", "after": "Write poem about moon" },
+      "enabled": false,
+      "category": "compression",
+      "priority": 100,
+      "patterns": [
+        { "find": "\\b(a|an|the)\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "compress-pronouns",
+      "name": "Simplify Pronouns",
+      "description": "Removes unnecessary pronouns",
+      "explanation": "Some pronouns can be omitted when context is clear.",
+      "example": { "before": "I need you to help me", "after": "Help" },
+      "enabled": false,
+      "category": "compression",
+      "priority": 101,
+      "patterns": [
+        { "find": "\\byou (should|must|need to)\\s+", "flags": "gi", "replace": "" }
+      ]
+    }
+  ]
+}
