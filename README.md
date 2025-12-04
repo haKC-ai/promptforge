@@ -34,7 +34,11 @@
   <a href="https://github.com/haKC-ai/prompthakcer/issues"><img src="https://img.shields.io/github/issues/haKC-ai/prompthakcer?style=for-the-badge&logo=github&logoColor=white&labelColor=0a0a14&color=00ffff" alt="Issues"></a>
 </p>
 
+<img width="2575" height="1443" alt="Screenshot 2025-12-04 at 3 43 45 PM" src="https://github.com/user-attachments/assets/36409cd2-6cba-4201-8c81-f9323c1dbc5a" />
+
 ## ⬡ Why You NEED This
+
+<img width="2480" height="1609" alt="Screenshot 2025-12-04 at 3 19 40 PM" src="https://github.com/user-attachments/assets/bf24b8ff-c9eb-4953-8736-4564f5bc6bc2" />
 
 In the age of AI, your prompt is your power. But are you leaking sensitive data? Wasting tokens on fluff? Confusing the model with verbose instructions?
 
@@ -64,6 +68,7 @@ Explain machine learning with examples.
 </td>
 </tr>
 </table>
+
 
 | Feature | Benefit |
 |---------|---------|
