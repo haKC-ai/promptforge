@@ -128,6 +128,20 @@ mindmap
 - **Site Configuration**: Enable/disable for specific platforms
 - **Keyboard Shortcuts**: Quick access with `Ctrl+Shift+O`
 
+### Real World Impact Dashboard
+See exactly how your optimizations translate to real savings:
+
+| Metric | What You See |
+|--------|--------------|
+| **Dollar Savings** | Live cost calculations based on enabled AI platforms |
+| **Energy Impact** | Compute energy saved with relatable comparisons |
+| **Scale Projections** | Potential savings at 10K/100K/1M prompts per day |
+| **Beyond Cost** | Latency, context, quality, security benefits |
+
+**Platform Pricing**: Dynamic table showing cost savings per platform based on December 2025 API pricing for ChatGPT, Claude (Sonnet/Opus/Haiku), Gemini, DeepSeek, Grok, Copilot, Perplexity, Poe, and Mistral.
+
+**Energy Comparisons**: Token savings translated to relatable terms like phone charges, LED bulb hours, laptop runtime, and EV miles.
+
 ---
 
 ## ⬡ Installation
