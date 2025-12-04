@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Prompt haKCer - haKC your prompts",
   "version": "23.0",
-  "description": "Master your AI interactions. Optimize prompts to save tokens, enhance clarity, and prevent data leaks. Secure, efficient, and powerful.",
+  "description": "Master your AI interactions. Optimize prompts to save tokens, enhance clarity, and prevent data leaks. Secure and efficient",
   "permissions": [
     "storage",
     "activeTab",
