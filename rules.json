@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "updated": "2025-12-03",
+  "version": "1.2.0",
+  "updated": "2025-12-04",
   "rules": [
     {
       "id": "redact-credit-cards",
@@ -98,6 +98,11 @@
         { "find": "\\bI appreciate (it|that|this|your help|your time|your assistance)[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bappreciate (it|that|this|your help|your time)[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bgreatly appreciated[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bin advance for\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bin advance[!.,]?\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bfor your help[!.,]?\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bfor that[!.,]?\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bfor this[!.,]?\\s*$", "flags": "gim", "replace": "" },
         { "find": "\\bsorry (for|about) the (long|lengthy|wordy) (message|email|text|prompt)[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bno pressure( though| at all)?[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bonly if you (want|have time|can|don't mind)[!.,]?\\s*", "flags": "gi", "replace": "" },
@@ -224,7 +229,87 @@
         { "find": "\\byou know,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bi mean,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\btotally\\s+", "flags": "gi", "replace": "" },
-        { "find": "\\bcompletely\\s+", "flags": "gi", "replace": "" }
+        { "find": "\\bcompletely\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bcurrently now\\s+", "flags": "gi", "replace": "currently " },
+        { "find": "\\bso because\\s+", "flags": "gi", "replace": "because " }
+      ]
+    },
+    {
+      "id": "remove-idioms",
+      "name": "Remove Idiomatic Fluff",
+      "description": "Removes idioms and colloquial expressions that add no meaning",
+      "explanation": "Idioms like 'throwing ideas at the wall' waste tokens without adding clarity.",
+      "example": { "before": "I'm spitballing here, throwing ideas at the wall", "after": "" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 14,
+      "patterns": [
+        { "find": "\\b(I'm |I am )?spitballing( here)?,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bthrowing ideas at the wall( to see what sticks)?,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bto see what sticks,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bso to speak,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bif you will,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bas it were,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bin a manner of speaking,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bfor lack of a better (word|term|phrase),?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\blong story short,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bat the end of the day,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwhen all is said and done,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bto make a long story short,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bto cut to the chase,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bbottom line,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bthe bottom line is,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bjust thinking out loud( here)?,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bthinking out loud,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bjust brainstorming( here)?,?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-uncertainty-starters",
+      "name": "Remove Uncertainty Expressions",
+      "description": "Removes 'I don't know', 'I'm not sure' and similar uncertainty markers",
+      "explanation": "Expressing uncertainty to AI wastes tokens - just state what you want.",
+      "example": { "before": "I don't know, maybe add a button?", "after": "Add a button." },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 13,
+      "patterns": [
+        { "find": "\\bI don'?t know,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI('m| am) not (entirely\\s+)?sure (if|what|how|why|whether|but|,)[^.!?]*[,.]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI('m| am) not (entirely\\s+)?(sure|certain),?\\s*but\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI('m| am) not (entirely\\s+)?(sure|certain),?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI have no idea,?\\s*but\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI have no idea,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bno idea,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bnot sure,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI couldn'?t say (for sure|exactly|really),?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwho knows,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\byour guess is as good as mine,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bbut I thought I'?d ask( anyway| in case| just in case)?,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI thought I'?d ask( anyway| in case| just in case)?,?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-trailing-vagueness",
+      "name": "Remove Trailing Vagueness",
+      "description": "Removes 'or something', 'or whatever', 'and stuff' at end of phrases",
+      "explanation": "Vague trail-offs weaken requests and waste tokens.",
+      "example": { "before": "make some cool sounds or something", "after": "make cool sounds" },
+      "enabled": true,
+      "category": "fluff",
+      "priority": 16,
+      "patterns": [
+        { "find": "\\bor something( like that)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bor something[?]\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bor whatever[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bor anything( like that)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\band stuff( like that)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\band things( like that)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bor whatnot[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\betc\\.?\\s*etc\\.?\\s*", "flags": "gi", "replace": "etc. " },
+        { "find": "\\byada yada( yada)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bblah blah( blah)?[?.,]?\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\band so on( and so forth)?[?.,]?\\s*", "flags": "gi", "replace": ". " }
       ]
     },
     {
@@ -238,12 +323,17 @@
       "priority": 16,
       "patterns": [
         { "find": "\\bit would be (really\\s+)?(cool|nice|great|awesome|amazing|helpful|fantastic) if you could\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bit would be (really\\s+)?(cool|nice|great|awesome|amazing|helpful|fantastic) (if|to)\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\b(it )?(would|might|could) be (really\\s+)?(cool|nice|great|awesome|amazing|helpful|fantastic)( if| to)?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bit (might|would) be (nice|good|helpful|useful) (if|to)\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bI was thinking (that )?(maybe,?\\s*)?", "flags": "gi", "replace": "" },
         { "find": "\\bmaybe,?\\s*just\\s*maybe,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bif it's not too much (trouble|to ask)\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bno worries if (you can't|not)[^.,]*[.,]?\\s*", "flags": "gi", "replace": "" },
-        { "find": "\\bit's (totally )?fine if (you can't|not)[^.,]*[.,]?\\s*", "flags": "gi", "replace": "" }
+        { "find": "\\bit's (totally )?fine if (you can't|not)[^.,]*[.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\b(super\\s+)?(cool|nice|great|awesome|elite)\\s+(hacker\\s+)?", "flags": "gi", "replace": "" },
+        { "find": "\\bwrite code:\\s*So\\s+", "flags": "gi", "replace": "Write code: " },
+        { "find": "\\bBe able to,?\\s*(maybe,?\\s*)?", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -471,7 +561,130 @@
         { "find": "\\bhere's the (deal|thing|situation)[:.!]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bI('m| am) going to ask you to\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bI('m| am) wondering\\s+", "flags": "gi", "replace": "" },
-        { "find": "\\bI wanted to ask\\s+", "flags": "gi", "replace": "" }
+        { "find": "\\bI wanted to ask\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\boh,? and I (almost )?forgot( to mention)?[,:\\-]?\\s*", "flags": "gi", "replace": "Also: " },
+        { "find": "\\boh,? and\\s+", "flags": "gi", "replace": "Also " },
+        { "find": "\\bI (almost )?forgot to (mention|say|add)[,:\\-]?\\s*", "flags": "gi", "replace": "Also: " },
+        { "find": "\\bone more thing[,:\\-]?\\s*", "flags": "gi", "replace": "Also: " },
+        { "find": "\\banother thing[,:\\-]?\\s*", "flags": "gi", "replace": "Also: " },
+        { "find": "\\bby the way[,:\\-]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bbtw[,:\\-]?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-movie-references",
+      "name": "Remove Movie/Media Reference Fluff",
+      "description": "Removes vague movie/media comparisons",
+      "explanation": "Saying 'like in the movies' is vague - describe what you actually want.",
+      "example": { "before": "make it look like something from the movies", "after": "" },
+      "enabled": true,
+      "category": "structure",
+      "priority": 52,
+      "patterns": [
+        { "find": "\\b(like|similar to) (something|stuff|things?) (from|in|you'?d see in) (the |a )?(movies?|films?|TV|television|shows?|games?|videos?)[?.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\b(like|similar to) (you'?d|you would) see in (the |a )?(movies?|films?|TV|television)[?.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bmovie[- ]style\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bHollywood[- ]style\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\blike in (the |a )?(movies?|films?)[?.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\byou know (like|how) in (the |a )?(movies?|films?)[^.!?]*[?.,]?\\s*", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "remove-process-narration",
+      "name": "Remove Process Narration",
+      "description": "Removes narration about one's own thought/work process",
+      "explanation": "Narrating your process wastes tokens - just state what you need.",
+      "example": { "before": "I am currently in the process of attempting to create", "after": "Creating" },
+      "enabled": true,
+      "category": "structure",
+      "priority": 53,
+      "patterns": [
+        { "find": "\\bI('m| am) (currently )?(in the process of |now )?(attempting|trying|working|endeavoring) to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bin the process of (attempting|trying) to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\battempting to endeavor to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bendeavoring to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bin the process of\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI('m| am) (currently )?working on\\s+", "flags": "gi", "replace": "Working on: " },
+        { "find": "\\bwhat I('m| am) (currently )?(trying|attempting|working) to do is\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bwhat I believe (might|could|may) be\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI believe (might|could|may) be\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "cleanup-orphaned-starts",
+      "name": "Clean Orphaned Sentence Starts",
+      "description": "Removes orphaned words at start of sentences after other rules run",
+      "explanation": "When rules remove phrases, they can leave orphaned connectors at the start.",
+      "example": { "before": "Be able to, maybe, write code", "after": "Write code" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 85,
+      "patterns": [
+        { "find": "^(Be able to|To be able to),?\\s*", "flags": "gim", "replace": "" },
+        { "find": "^(And|But|Or|So|Also|Then|Now|Well),?\\s+", "flags": "gim", "replace": "" },
+        { "find": "^,\\s*", "flags": "gim", "replace": "" },
+        { "find": "^[.!?]+\\s*", "flags": "gim", "replace": "" },
+        { "find": "^-+\\s*", "flags": "gim", "replace": "" },
+        { "find": "^:\\s*", "flags": "gim", "replace": "" }
+      ]
+    },
+    {
+      "id": "cleanup-orphaned-connectors",
+      "name": "Clean Orphaned Connectors",
+      "description": "Removes orphaned conjunctions and connectors mid-sentence",
+      "explanation": "After removing phrases, connectors like 'and' or 'but' can be left dangling.",
+      "example": { "before": "I want , and , a button", "after": "I want a button" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 86,
+      "patterns": [
+        { "find": ",\\s*(and|but|or|so)\\s*,", "flags": "gi", "replace": "," },
+        { "find": ",\\s*,+", "flags": "g", "replace": "," },
+        { "find": "\\.\\s*\\.+", "flags": "g", "replace": "." },
+        { "find": "\\?\\s*\\?+", "flags": "g", "replace": "?" },
+        { "find": "!\\s*!+", "flags": "g", "replace": "!" },
+        { "find": ",\\s*(and|but|or)\\s*\\.", "flags": "gi", "replace": "." },
+        { "find": "\\s+(and|but|or)\\s*[.!?]", "flags": "gi", "replace": "." },
+        { "find": "\\s+(and|but|or)\\s*$", "flags": "gim", "replace": "" }
+      ]
+    },
+    {
+      "id": "cleanup-dangling-phrases",
+      "name": "Clean Dangling Incomplete Phrases",
+      "description": "Removes incomplete phrases left after other rules",
+      "explanation": "After aggressive cleanup, some partial phrases remain that make no sense.",
+      "example": { "before": "help me out? understand that", "after": "understand that" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 87,
+      "patterns": [
+        { "find": "\\bhelp me out\\??\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhelp out\\??\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bto make this[^.!?]*as (cool|good|nice|great) as possible,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bas (cool|good|nice|great|awesome) as possible,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bmight want it to\\s+", "flags": "gi", "replace": "want it to " },
+        { "find": "\\bcould do\\s+", "flags": "gi", "replace": "do " },
+        { "find": "\\bwould be so kind as to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bso kind as to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bkind as to\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bas to\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "cleanup-question-fragments",
+      "name": "Clean Question Fragments",
+      "description": "Converts orphaned questions to statements",
+      "explanation": "Questions that lost their context should become direct statements.",
+      "example": { "before": "have like, some buttons?", "after": "have buttons." },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 88,
+      "patterns": [
+        { "find": "\\bhave like,?\\s*", "flags": "gi", "replace": "have " },
+        { "find": "\\blike,?\\s+some\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bsome\\s+(buttons|features|things|stuff)\\s+and\\s+(stuff|things)\\??", "flags": "gi", "replace": "$1" },
+        { "find": "\\band (stuff|things)\\??\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\b(do|does|did|have|has|had|can|could|will|would|should)\\s+(hacking|cool|nice|good)\\s+things\\??", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -486,7 +699,8 @@
       "patterns": [
         { "find": "\\s{2,}", "flags": "g", "replace": " " },
         { "find": "^\\s+", "flags": "g", "replace": "" },
-        { "find": "\\s+$", "flags": "g", "replace": "" }
+        { "find": "\\s+$", "flags": "g", "replace": "" },
+        { "find": "\\s+([.,!?])", "flags": "g", "replace": "$1" }
       ]
     },
     {
@@ -501,7 +715,28 @@
       "patterns": [
         { "find": "\\s+([.,!?;:])", "flags": "g", "replace": "$1" },
         { "find": "([.,!?;:])\\s*([.,!?;:])+", "flags": "g", "replace": "$1" },
-        { "find": "([.,!?;:])([A-Za-z])", "flags": "g", "replace": "$1 $2" }
+        { "find": "([.,!?;:])([A-Za-z])", "flags": "g", "replace": "$1 $2" },
+        { "find": "^[.,;:\\s]+", "flags": "gm", "replace": "" },
+        { "find": "\\?+", "flags": "g", "replace": "?" },
+        { "find": "!+", "flags": "g", "replace": "!" },
+        { "find": "\\.{2,}", "flags": "g", "replace": "." }
+      ]
+    },
+    {
+      "id": "fix-sentence-structure",
+      "name": "Fix Sentence Structure",
+      "description": "Fixes broken sentence structures after cleanup",
+      "explanation": "Ensures sentences start properly after aggressive cleanup.",
+      "example": { "before": ". And then", "after": "Then" },
+      "enabled": true,
+      "category": "formatting",
+      "priority": 92,
+      "patterns": [
+        { "find": "([.!?])\\s*(And|But|Or|So)\\s+", "flags": "g", "replace": "$1 " },
+        { "find": "^\\s*(And|But|Or|So)\\s+", "flags": "gim", "replace": "" },
+        { "find": ":\\s*\\.", "flags": "g", "replace": ":" },
+        { "find": ",\\s*\\.", "flags": "g", "replace": "." },
+        { "find": "\\s*\\.\\s*$", "flags": "gm", "replace": "." }
       ]
     },
     {
