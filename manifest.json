@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Prompt haKCer - haKC your prompts",
-  "version": "23.1",
+  "name": "Prompt haKCer",
+  "version": "23.2",
   "description": "Save tokens. Be secure. Write better prompts. It's got a haKC button.",
   "permissions": [
     "storage",
@@ -19,7 +19,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "Prompt haKCer - haKC your prompts"
+    "default_title": "Prompt haKCer"
   },
   "options_page": "options/options.html",
   "background": {

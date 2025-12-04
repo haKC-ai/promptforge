@@ -366,7 +366,231 @@
             <input type="file" id="importFile" accept=".json" style="display: none;">
           </div>
         </div>
-        
+
+        <!-- Real World Impact Card -->
+        <div class="card impact-card">
+          <h3 class="card-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Real World Impact
+          </h3>
+          <p class="card-desc">Your token savings translated to actual costs and performance gains</p>
+
+          <!-- Your Savings Summary - Split into Two Hero Boxes -->
+          <div class="impact-hero-grid">
+            <!-- Dollar Savings -->
+            <div class="impact-hero">
+              <div class="impact-hero-icon dollar">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div class="impact-hero-value">
+                <span class="impact-currency">$</span>
+                <span id="totalSavingsValue">0.00</span>
+              </div>
+              <div class="impact-hero-label">Estimated Cost Savings</div>
+              <div class="impact-hero-sublabel">Based on <span id="impactTokenCount">0</span> tokens saved</div>
+            </div>
+
+            <!-- Compute/Energy Impact -->
+            <div class="impact-hero energy">
+              <div class="impact-hero-icon energy">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <div class="impact-hero-value energy-value">
+                <span id="computeSavedValue">0</span>
+                <span class="impact-unit" id="energyUnit">mWh</span>
+              </div>
+              <div class="impact-hero-label">Energy Not Burned</div>
+              <div class="impact-hero-sublabel energy-explain" id="energyExplain">milliwatt-hours of electricity</div>
+              <div class="impact-hero-sublabel" id="energyComparison">Like charging your phone <span>0</span> times</div>
+            </div>
+          </div>
+
+          <!-- Model Breakdown Table -->
+          <div class="impact-section">
+            <h4 class="impact-section-title">Cost Savings by Platform</h4>
+            <p class="impact-section-desc">Based on your enabled sites · Pricing as of Dec 2025</p>
+            <div class="impact-table-container">
+              <table class="impact-table">
+                <thead>
+                  <tr>
+                    <th>Platform / Model</th>
+                    <th>Input Cost</th>
+                    <th>Your Savings</th>
+                  </tr>
+                </thead>
+                <tbody id="impact-models-tbody">
+                  <!-- Dynamically populated based on enabled sites -->
+                </tbody>
+              </table>
+            </div>
+            <p class="impact-table-note">Only showing platforms you have enabled</p>
+          </div>
+
+          <!-- Enterprise Scale Projection -->
+          <div class="impact-section">
+            <h4 class="impact-section-title">
+              Scale Projection
+              <span class="impact-badge">If you scaled this</span>
+            </h4>
+            <div class="scale-grid">
+              <div class="scale-card">
+                <div class="scale-header">
+                  <span class="scale-prompts">10K</span>
+                  <span class="scale-period">prompts/day</span>
+                </div>
+                <div class="scale-values">
+                  <div class="scale-item">
+                    <span class="scale-label">Monthly</span>
+                    <span class="scale-value" id="scale-10k-monthly">$0</span>
+                  </div>
+                  <div class="scale-item">
+                    <span class="scale-label">Annual</span>
+                    <span class="scale-value accent" id="scale-10k-annual">$0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="scale-card">
+                <div class="scale-header">
+                  <span class="scale-prompts">100K</span>
+                  <span class="scale-period">prompts/day</span>
+                </div>
+                <div class="scale-values">
+                  <div class="scale-item">
+                    <span class="scale-label">Monthly</span>
+                    <span class="scale-value" id="scale-100k-monthly">$0</span>
+                  </div>
+                  <div class="scale-item">
+                    <span class="scale-label">Annual</span>
+                    <span class="scale-value accent" id="scale-100k-annual">$0</span>
+                  </div>
+                </div>
+              </div>
+              <div class="scale-card featured">
+                <div class="scale-header">
+                  <span class="scale-prompts">1M</span>
+                  <span class="scale-period">prompts/day</span>
+                </div>
+                <div class="scale-values">
+                  <div class="scale-item">
+                    <span class="scale-label">Monthly</span>
+                    <span class="scale-value" id="scale-1m-monthly">$0</span>
+                  </div>
+                  <div class="scale-item">
+                    <span class="scale-label">Annual</span>
+                    <span class="scale-value accent glow" id="scale-1m-annual">$0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Beyond Dollar Cost -->
+          <div class="impact-section">
+            <h4 class="impact-section-title">Beyond Dollar Cost</h4>
+            <div class="impact-benefits">
+              <div class="benefit-item">
+                <div class="benefit-icon latency">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Latency Reduction</span>
+                  <span class="benefit-value" id="latency-saved">~0ms</span>
+                  <span class="benefit-desc">saved per request</span>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon context">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="9" y1="21" x2="9" y2="9"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Context Preserved</span>
+                  <span class="benefit-value" id="context-saved">0</span>
+                  <span class="benefit-desc">tokens for RAG/history</span>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon quality">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Output Quality</span>
+                  <span class="benefit-value">Cleaner</span>
+                  <span class="benefit-desc">less noise in = less noise out</span>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon throughput">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Rate Limits</span>
+                  <span class="benefit-value">Higher</span>
+                  <span class="benefit-desc">effective throughput</span>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon security">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Security</span>
+                  <span class="benefit-value">Reduced Risk</span>
+                  <span class="benefit-desc">less surface for prompt injection</span>
+                </div>
+              </div>
+              <div class="benefit-item">
+                <div class="benefit-icon privacy">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                </div>
+                <div class="benefit-content">
+                  <span class="benefit-title">Data Leakage</span>
+                  <span class="benefit-value">Minimized</span>
+                  <span class="benefit-desc">fewer tokens = less exposure</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Environmental Impact -->
+          <div class="impact-section impact-env">
+            <div class="env-content">
+              <div class="env-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              </div>
+              <div class="env-text">
+                <span class="env-title">The Meta Impact</span>
+                <span class="env-desc">If 10% of all AI prompts globally were optimized by even 30%, the aggregate compute savings would be measured in <strong>megawatts</strong> of datacenter power.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="card card-danger">
           <h3 class="card-title">Danger Zone</h3>
           <p class="card-desc">These actions cannot be undone</p>

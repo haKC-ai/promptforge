@@ -784,6 +784,622 @@ kbd {
   letter-spacing: 0.5px;
 }
 
+/* ========== REAL WORLD IMPACT CARD ========== */
+.impact-card {
+  background: linear-gradient(135deg, rgba(18, 18, 31, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient);
+}
+
+.impact-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.impact-card .card-title svg {
+  color: var(--success);
+}
+
+/* Hero Section - Split Grid Layout */
+.impact-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.impact-hero {
+  text-align: center;
+  padding: 28px 20px;
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 255, 255, 0.05) 50%, rgba(168, 85, 247, 0.05) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  position: relative;
+}
+
+.impact-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Energy variant styling */
+.impact-hero.energy {
+  background: linear-gradient(135deg, rgba(255, 170, 0, 0.05) 0%, rgba(255, 119, 0, 0.05) 50%, rgba(236, 72, 153, 0.05) 100%);
+  border: 1px solid rgba(255, 170, 0, 0.15);
+}
+
+.impact-hero.energy::after {
+  background: radial-gradient(ellipse at center, rgba(255, 170, 0, 0.1) 0%, transparent 70%);
+}
+
+/* Hero Icon */
+.impact-hero-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.impact-hero-icon.dollar {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--success);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+}
+
+.impact-hero-icon.energy {
+  background: rgba(255, 170, 0, 0.1);
+  color: var(--warning);
+  box-shadow: 0 0 20px rgba(255, 170, 0, 0.2);
+}
+
+.impact-hero-value {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--success) 0%, var(--cyan) 50%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.impact-hero-value.energy-value {
+  background: linear-gradient(135deg, var(--warning) 0%, #ff7700 50%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulseGlowEnergy 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3)); }
+  50% { filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.6)); }
+}
+
+@keyframes pulseGlowEnergy {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.3)); }
+  50% { filter: drop-shadow(0 0 40px rgba(255, 170, 0, 0.6)); }
+}
+
+.impact-currency {
+  font-size: 32px;
+  vertical-align: top;
+  margin-right: 4px;
+}
+
+.impact-unit {
+  font-size: 24px;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+.impact-hero-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.impact-hero-sublabel {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.impact-hero-sublabel span {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.impact-hero.energy .impact-hero-sublabel span {
+  color: var(--warning);
+}
+
+.impact-hero-sublabel.energy-explain {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  font-style: italic;
+}
+
+/* Impact Sections */
+.impact-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(45, 45, 90, 0.5);
+}
+
+.impact-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.impact-badge {
+  padding: 3px 8px;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 4px;
+  font-size: 10px;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.impact-section-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: -12px;
+  margin-bottom: 16px;
+}
+
+.impact-table-note {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* Impact Table */
+.impact-table-container {
+  max-height: 280px; /* Show ~5 rows then scroll */
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.impact-table-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.impact-table-container::-webkit-scrollbar-track {
+  background: var(--bg-base);
+  border-radius: 3px;
+}
+
+.impact-table-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.impact-table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--purple);
+}
+
+.impact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.impact-table thead {
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  z-index: 1;
+}
+
+.impact-table th,
+.impact-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(45, 45, 90, 0.3);
+}
+
+.impact-table th {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.impact-table td.dim {
+  color: var(--text-muted);
+}
+
+.impact-table td.savings {
+  font-weight: 600;
+  color: var(--success);
+}
+
+.impact-table td.savings.highlight {
+  font-size: 15px;
+  color: var(--success);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.impact-table .highlight-row {
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.impact-table .highlight-row td {
+  border-bottom: none;
+}
+
+/* Model Badges */
+.model-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.model-badge.gpt4o {
+  background: rgba(16, 163, 127, 0.15);
+  color: #10a37f;
+  border: 1px solid rgba(16, 163, 127, 0.3);
+}
+
+.model-badge.sonnet {
+  background: rgba(217, 119, 87, 0.15);
+  color: #d97757;
+  border: 1px solid rgba(217, 119, 87, 0.3);
+}
+
+.model-badge.gpt4turbo {
+  background: rgba(16, 163, 127, 0.2);
+  color: #10a37f;
+  border: 1px solid rgba(16, 163, 127, 0.4);
+}
+
+.model-badge.opus {
+  background: linear-gradient(135deg, rgba(217, 119, 87, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  color: #e08d6b;
+  border: 1px solid rgba(217, 119, 87, 0.4);
+}
+
+.model-badge.chatgpt {
+  background: rgba(16, 163, 127, 0.15);
+  color: #10a37f;
+  border: 1px solid rgba(16, 163, 127, 0.3);
+}
+
+.model-badge.claude {
+  background: rgba(217, 119, 87, 0.15);
+  color: #d97757;
+  border: 1px solid rgba(217, 119, 87, 0.3);
+}
+
+.model-badge.gemini {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.15) 0%, rgba(234, 67, 53, 0.15) 100%);
+  color: #4285f4;
+  border: 1px solid rgba(66, 133, 244, 0.3);
+}
+
+.model-badge.grok {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.model-badge.copilot {
+  background: rgba(0, 120, 212, 0.15);
+  color: #0078d4;
+  border: 1px solid rgba(0, 120, 212, 0.3);
+}
+
+.model-badge.perplexity {
+  background: rgba(32, 178, 170, 0.15);
+  color: #20b2aa;
+  border: 1px solid rgba(32, 178, 170, 0.3);
+}
+
+.model-badge.poe {
+  background: rgba(138, 43, 226, 0.15);
+  color: #8a2be2;
+  border: 1px solid rgba(138, 43, 226, 0.3);
+}
+
+.model-badge.deepseek {
+  background: rgba(0, 102, 255, 0.15);
+  color: #0066ff;
+  border: 1px solid rgba(0, 102, 255, 0.3);
+}
+
+.model-badge.mistral {
+  background: rgba(255, 119, 0, 0.15);
+  color: #ff7700;
+  border: 1px solid rgba(255, 119, 0, 0.3);
+}
+
+/* Scale Projection Grid */
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.scale-card {
+  background: var(--bg-input);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.scale-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.scale-card.featured {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, rgba(255, 0, 255, 0.08) 100%);
+  border-color: var(--cyan);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+}
+
+.scale-header {
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(45, 45, 90, 0.5);
+}
+
+.scale-prompts {
+  font-size: 24px;
+  font-weight: 800;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.scale-period {
+  display: block;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.scale-values {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scale-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scale-label {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.scale-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.scale-value.accent {
+  color: var(--success);
+}
+
+.scale-value.glow {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  font-size: 15px;
+}
+
+/* Benefits Grid */
+.impact-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  background: var(--bg-input);
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.benefit-item:hover {
+  border-color: var(--border-focus);
+}
+
+.benefit-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.benefit-icon.latency {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--cyan);
+}
+
+.benefit-icon.context {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--purple);
+}
+
+.benefit-icon.quality {
+  background: rgba(255, 170, 0, 0.1);
+  color: var(--warning);
+}
+
+.benefit-icon.throughput {
+  background: rgba(0, 255, 136, 0.1);
+  color: var(--success);
+}
+
+.benefit-icon.security {
+  background: rgba(255, 68, 102, 0.1);
+  color: var(--error);
+}
+
+.benefit-icon.privacy {
+  background: rgba(236, 72, 153, 0.1);
+  color: var(--pink);
+}
+
+.benefit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.benefit-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.benefit-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.benefit-desc {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Environmental Impact */
+.impact-env {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 200, 100, 0.02) 100%);
+  border-radius: 12px;
+  padding: 16px !important;
+  margin-top: 20px !important;
+  border-top: none !important;
+  border: 1px solid rgba(0, 255, 136, 0.15);
+}
+
+.env-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.env-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(0, 255, 136, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--success);
+}
+
+.env-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.env-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.env-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.env-desc strong {
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* Responsive Adjustments for Impact Card */
+@media (max-width: 768px) {
+  .impact-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-benefits {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .impact-hero-value {
+    font-size: 36px;
+  }
+
+  .impact-currency {
+    font-size: 24px;
+  }
+
+  .impact-unit {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 550px) {
+  .impact-benefits {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ========== FOOTER ========== */
 .footer {
   text-align: center;
