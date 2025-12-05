@@ -1,5 +1,9 @@
 # Privacy Policy for PrompthaKCer
 
+![License](https://img.shields.io/github/license/haKC-ai/prompthakcer)
+![Manifest](https://img.shields.io/badge/manifest-v3-blue)
+![Privacy](https://img.shields.io/badge/privacy-local%20only-green)
+
 **Last Updated: December 2024**
 
 ## Overview
@@ -48,15 +52,61 @@ You have full control over your data:
 
 ## Permissions
 
-PrompthaKCer requests the following permissions:
+PrompthaKCer requests the following permissions to function correctly. All operations are performed locally.
 
 | Permission | Purpose |
 |------------|---------|
-| `storage` | Save your settings and history locally |
-| `activeTab` | Access the current tab to detect AI chat sites |
-| `contextMenus` | Add right-click optimization option |
-| `clipboardWrite` | Copy optimized prompts to clipboard |
-| `host_permissions` | Inject the optimization interface on AI chat sites |
+| `storage` | Save your settings, history, and custom rules locally on your device. |
+| `activeTab` | Detect if the current tab is a supported AI chat site when you click the extension icon. |
+| `contextMenus` | Add "Optimize with PrompthaKCer" option to the right-click menu. |
+| `clipboardWrite` | Allow the extension to copy optimized prompts to your clipboard. |
+| `clipboardRead` | Allow pasting text from your clipboard into the extension for optimization. |
+| `scripting` | Inject the optimization interface and logic into supported AI chat websites. |
+
+### How Permissions Work
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Extension
+    participant Browser
+    participant Page as Web Page
+
+    User->>Extension: Click Icon / Shortcut
+    Extension->>Browser: Request activeTab permission
+    Browser-->>Extension: Grant access to current tab
+    Extension->>Browser: scripting.executeScript()
+    Browser->>Page: Inject Content Scripts (Local)
+    Page->>User: Show Optimization UI
+```
+
+### Validation Process
+
+You can verify that PrompthaKCer respects your privacy by reviewing the code and manifest.
+
+```mermaid
+graph TD
+    A[Start Verification] --> B[Check manifest.json]
+    B --> C{Permissions}
+    C -->|storage| D[Local Storage Only]
+    C -->|activeTab| E[On-Demand Access]
+    C -->|scripting| F[Inject Local Scripts]
+
+    B --> G{Network}
+    G -->|No host_permissions| H[No Arbitrary Web Access]
+    G -->|No remote code| I[Self-Contained]
+
+    A --> J[Review Source Code]
+    J --> K[Verify no fetch/XHR to external servers]
+
+    D --> L[Pass]
+    E --> L
+    F --> L
+    H --> L
+    I --> L
+    K --> L
+    L --> M[Safe & Private]
+```
 
 ## Third-Party Services
 
