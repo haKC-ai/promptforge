@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "updated": "2025-12-06",
   "presets": {
     "none": {
@@ -167,6 +167,8 @@
         { "find": "\\bgreatly appreciated[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bin advance for\\s*$", "flags": "gim", "replace": "" },
         { "find": "\\bin advance[!.,]?\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bso in advance[!.,]?\\s*$", "flags": "gim", "replace": "" },
+        { "find": "\\bso in advance[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bfor your help[!.,]?\\s*$", "flags": "gim", "replace": "" },
         { "find": "\\bfor that[!.,]?\\s*$", "flags": "gim", "replace": "" },
         { "find": "\\bfor this[!.,]?\\s*$", "flags": "gim", "replace": "" },
@@ -248,13 +250,18 @@
         { "find": "\\bI'd be grateful if you could\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bit would be great if you could\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bit would mean a lot if you could\\s+", "flags": "gi", "replace": "" },
-        { "find": "\\bI would greatly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI would greatly\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwould greatly\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bgreatly\\s+$", "flags": "gim", "replace": "" },
         { "find": "\\bit would be if\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bI would (greatly |really )?potentially,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bI but I\\s+", "flags": "gi", "replace": "I " },
         { "find": "\\bbut I was wondering,?\\s*(possibly,?\\s*)?", "flags": "gi", "replace": "" },
         { "find": "^!\\s*but\\s+", "flags": "gim", "replace": "" },
-        { "find": "\\bI was hoping that you might\\s*", "flags": "gi", "replace": "" }
+        { "find": "\\bI was hoping that you might\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI was hoping (that )?you\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwas hoping (that )?(you )?(might|could|would)\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhoping (that )?(you )?(might|could|would)\\s*", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -313,7 +320,8 @@
         { "find": "\\bcompletely\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bcurrently now\\s+", "flags": "gi", "replace": "currently " },
         { "find": "\\bso because\\s+", "flags": "gi", "replace": "because " },
-        { "find": "\\betc\\.?\\s+", "flags": "gi", "replace": "" }
+        { "find": "\\betc\\.?\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\b(um|uh|er|erm|hmm|hm|ah),?\\s*", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -415,7 +423,12 @@
         { "find": "\\bit's (totally )?fine if (you can't|not)[^.,]*[.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\b(super\\s+)?(cool|nice|great|awesome|elite)\\s+(hacker\\s+)?", "flags": "gi", "replace": "" },
         { "find": "\\bwrite code:\\s*So\\s+", "flags": "gi", "replace": "Write code: " },
-        { "find": "\\bBe able to,?\\s*(maybe,?\\s*)?", "flags": "gi", "replace": "" }
+        { "find": "\\bBe able to,?\\s*(maybe,?\\s*)?", "flags": "gi", "replace": "" },
+        { "find": "\\bit could have\\s+", "flags": "gi", "replace": "Include " },
+        { "find": "\\bit might have\\s+", "flags": "gi", "replace": "Include " },
+        { "find": "\\bit should have\\s+", "flags": "gi", "replace": "Include " },
+        { "find": "\\bI('d| would) love (it )?if\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI('d| would) love for you to\\s+", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -506,7 +519,9 @@
         { "find": "\\bin addition to\\s+", "flags": "gi", "replace": "besides " },
         { "find": "\\bin the process of\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bwith the exception of\\s+", "flags": "gi", "replace": "except " },
-        { "find": "\\bin close proximity to\\s+", "flags": "gi", "replace": "near " }
+        { "find": "\\bin close proximity to\\s+", "flags": "gi", "replace": "near " },
+        { "find": "\\bin (the )?(area|field|domain|realm) of,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bin terms of,?\\s*", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -527,10 +542,12 @@
         { "find": "\\bfeel free to\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bdon't hesitate to\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bany help you (might|may|could|would) (be able to\\s+)?provide[!.,]?\\s*", "flags": "gi", "replace": "" },
-        { "find": "\\bhelp me out with something\\??\\s*", "flags": "gi", "replace": "help with: " },
-        { "find": "\\bhelp me with something\\??\\s*", "flags": "gi", "replace": "help: " },
+        { "find": "\\bhelp me out with something\\??\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhelp me with something\\??\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bpotentially,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bwriting some code for me\\??\\s*", "flags": "gi", "replace": "write code: " },
+        { "find": "\\bsome code for me\\??\\s*", "flags": "gi", "replace": "write code: " },
+        { "find": "\\bcode for me\\??\\s*", "flags": "gi", "replace": "write code: " },
         { "find": "\\btake into (account|consideration),?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bensure consider\\s+", "flags": "gi", "replace": "consider " },
         { "find": "\\bgive (some )?consideration to\\s+", "flags": "gi", "replace": "consider " },
@@ -771,9 +788,17 @@
         { "find": "\\bit would be and\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bbe help me\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bbe help:\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bbe help with:\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bbe help\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bhelp with:\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bhelp:\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bbecause help me\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bhelp:\\s*I\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bthat ensure\\s+", "flags": "gi", "replace": "ensure " },
+        { "find": "\\bensure create\\s+", "flags": "gi", "replace": "create " },
+        { "find": "\\bensure write\\s+", "flags": "gi", "replace": "write " },
+        { "find": "\\bensure make\\s+", "flags": "gi", "replace": "make " },
+        { "find": "\\bensure build\\s+", "flags": "gi", "replace": "build " },
         { "find": "\\bcreate some stuff\\.?\\s*", "flags": "gi", "replace": "create. " },
         { "find": "\\bhelp me with this thing\\??\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bhelp with this thing\\??\\s*", "flags": "gi", "replace": "" },
@@ -785,7 +810,18 @@
         { "find": "\\bdetermine create\\.?\\s*", "flags": "gi", "replace": "create." },
         { "find": "\\bI think,\\s*", "flags": "gi", "replace": "" },
         { "find": "\\betc,\\s*$", "flags": "gim", "replace": "" },
-        { "find": "\\betc,$", "flags": "gim", "replace": "" }
+        { "find": "\\betc,$", "flags": "gim", "replace": "" },
+        { "find": "\\bwrite code:\\s*write\\s+", "flags": "gi", "replace": "Write " },
+        { "find": "\\bwrite code:\\s*create\\s+", "flags": "gi", "replace": "Create " },
+        { "find": "\\bwrite code:\\s*build\\s+", "flags": "gi", "replace": "Build " },
+        { "find": "\\bwrite code:\\s*make\\s+", "flags": "gi", "replace": "Make " },
+        { "find": "\\bwrite code:\\s*$", "flags": "gim", "replace": "" },
+        { "find": "^write code:\\s*", "flags": "gim", "replace": "" },
+        { "find": "\\bInclude some\\s+", "flags": "gi", "replace": "Include " },
+        { "find": "\\bInclude a\\s+", "flags": "gi", "replace": "Include " },
+        { "find": "\\bsome buttons\\b", "flags": "gi", "replace": "buttons" },
+        { "find": "\\bsome features\\b", "flags": "gi", "replace": "features" },
+        { "find": "^I\\s+$", "flags": "gim", "replace": "" }
       ]
     },
     {
@@ -935,10 +971,11 @@
       "category": "structure",
       "priority": 57,
       "patterns": [
-        { "find": "\\b(maybe|perhaps|possibly) (you could |)(use|format|write)( it)?( in| as| with)?\\s+", "flags": "gi", "replace": "Format: " },
-        { "find": "\\bif you (could|want|think),? (maybe |)(use|format|write)\\s+", "flags": "gi", "replace": "Format: " },
-        { "find": "\\bit would be (nice|good|great|helpful) (if |)(it was |to have it |)in\\s+", "flags": "gi", "replace": "Format: " },
-        { "find": "\\bI('d| would) (like|prefer|want) (it |)(in|as)\\s+", "flags": "gi", "replace": "Format: " }
+        { "find": "\\b(maybe|perhaps|possibly) (you could |)(use|format) (it )?(in|as|with) (bullet points|a list|numbered list|markdown|JSON|code)\\??\\s*", "flags": "gi", "replace": "Use $6. " },
+        { "find": "\\b(maybe|perhaps|possibly) (you could |)(use|format|write)( it)?( in| as| with)?\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bif you (could|want|think),? (maybe |)(use|format|write)\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bit would be (nice|good|great|helpful) (if |)(it was |to have it |)in\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI('d| would) (like|prefer|want) (it |)(in|as)\\s+", "flags": "gi", "replace": "" }
       ]
     },
     {
