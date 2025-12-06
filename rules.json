@@ -32,12 +32,6 @@
       "icon": "[5]",
       "enabledCategories": ["formatting", "fluff", "redundancy", "verbosity", "qualifiers", "structure", "compression", "security"]
     },
-    "crafr": {
-      "name": "CRAFR",
-      "description": "Structures output with Context/Role/Action/Format/Rules labels",
-      "icon": "[S]",
-      "enabledCategories": ["formatting", "fluff", "redundancy", "verbosity", "qualifiers", "structure", "security", "structuring"]
-    },
     "custom": {
       "name": "Custom",
       "description": "Your own rule configuration",
@@ -54,7 +48,6 @@
     "formatting": { "name": "Formatting", "icon": "FT", "description": "Cleans up whitespace/punctuation" },
     "compression": { "name": "Deep Compression", "icon": "DC", "description": "Aggressive token reduction" },
     "security": { "name": "Security (DLP)", "icon": "SEC", "description": "Redacts sensitive data" },
-    "structuring": { "name": "CRAFR Structuring", "icon": "CR", "description": "Tags content with CRAFR labels" },
     "custom": { "name": "Custom Rules", "icon": "CU", "description": "Your personal rules" }
   },
   "rules": [
@@ -1051,7 +1044,7 @@
       "explanation": "Identifies when user specifies a role for the AI to adopt.",
       "example": { "before": "As a Python developer, write code", "after": "[Role/Persona] Python developer\nWrite code" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 200,
       "patterns": [
         { "find": "\\b[Aa]s an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "g", "replace": "[Role/Persona] $1\n" },
@@ -1068,7 +1061,7 @@
       "explanation": "Identifies the primary task being requested.",
       "example": { "before": "Write a web scraper", "after": "[Action/Task] Write a web scraper" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 201,
       "patterns": [
         { "find": "^([Ww]rite|[Cc]reate|[Bb]uild|[Dd]evelop|[Ii]mplement|[Dd]esign|[Gg]enerate|[Mm]ake)\\s+(?:a |an |the )?([A-Za-z][A-Za-z0-9\\s\\-]{3,50}?)(?=\\.|,|\\n|$|\\s+(?:that|which|for|using|with|in))", "flags": "gm", "replace": "[Action/Task] $1 $2" },
@@ -1084,7 +1077,7 @@
       "explanation": "Identifies requested output format.",
       "example": { "before": "using bullet points", "after": "[Format] bullet points" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 202,
       "patterns": [
         { "find": "\\b[Uu]se (bullet points|numbered list|markdown|JSON|XML|YAML|CSV|table|code blocks?|plain text)\\b\\.?\\s*", "flags": "g", "replace": "\n[Format] $1\n" },
@@ -1101,7 +1094,7 @@
       "explanation": "Identifies limits, requirements, and restrictions.",
       "example": { "before": "Keep it under 50 lines", "after": "[Rules/Constraints] Under 50 lines" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 203,
       "patterns": [
         { "find": "\\b[Kk]eep it (under|below|within|around|about) (\\d+)\\s*(lines?|words?|characters?|sentences?|paragraphs?|tokens?|pages?)\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] Under $2 $3\n" },
@@ -1121,7 +1114,7 @@
       "explanation": "Identifies background context provided.",
       "example": { "before": "For a React project", "after": "[Context] React project" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 204,
       "patterns": [
         { "find": "\\b[Ff]or (?:a |an |my |the |this )?([A-Za-z][A-Za-z0-9\\s\\-]{3,40}(?:project|application|app|website|site|system|platform|tool|service|API|database|script|program|codebase)),?\\s*", "flags": "g", "replace": "\n[Context] $1\n" },
@@ -1139,7 +1132,7 @@
       "explanation": "Identifies examples or samples provided by user.",
       "example": { "before": "For example: print('hello')", "after": "[Examples] print('hello')" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 205,
       "patterns": [
         { "find": "\\b[Ff]or example:?\\s+([^\\.\\n]{5,200})\\.?\\s*", "flags": "g", "replace": "\n[Examples] $1\n" },
@@ -1157,7 +1150,7 @@
       "explanation": "Normalizes spacing and removes duplicate labels.",
       "example": { "before": "[Role/Persona] dev\n\n\n[Action/Task]", "after": "[Role/Persona] dev\n[Action/Task]" },
       "enabled": true,
-      "category": "structuring",
+      "category": "structure",
       "priority": 210,
       "patterns": [
         { "find": "\\n{3,}", "flags": "g", "replace": "\n\n" },
