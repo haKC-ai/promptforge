@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated": "2025-12-06",
   "presets": {
     "none": {
@@ -255,13 +255,19 @@
         { "find": "\\bgreatly\\s+$", "flags": "gim", "replace": "" },
         { "find": "\\bit would be if\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bI would (greatly |really )?potentially,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI would greatly go\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI would greatly\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bwould greatly go\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bgreatly go\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bI but I\\s+", "flags": "gi", "replace": "I " },
         { "find": "\\bbut I was wondering,?\\s*(possibly,?\\s*)?", "flags": "gi", "replace": "" },
         { "find": "^!\\s*but\\s+", "flags": "gim", "replace": "" },
         { "find": "\\bI was hoping that you might\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bI was hoping (that )?you\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bwas hoping (that )?(you )?(might|could|would)\\s*", "flags": "gi", "replace": "" },
-        { "find": "\\bhoping (that )?(you )?(might|could|would)\\s*", "flags": "gi", "replace": "" }
+        { "find": "\\bhoping (that )?(you )?(might|could|would)\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bI was wondering,?\\s*possibly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwondering,?\\s*possibly,?\\s*", "flags": "gi", "replace": "" }
       ]
     },
     {
@@ -730,16 +736,22 @@
       "category": "formatting",
       "priority": 85,
       "patterns": [
+        { "find": "^[!.,;:?]+\\s*I was wondering[^.!?]*[.!?]?\\s*", "flags": "gim", "replace": "" },
+        { "find": "^[!.,;:?]+\\s*was wondering[^.!?]*[.!?]?\\s*", "flags": "gim", "replace": "" },
+        { "find": "^!\\s*I was[^.!?]*[.!?]?\\s*", "flags": "gim", "replace": "" },
         { "find": "^(Be able to|To be able to),?\\s*", "flags": "gim", "replace": "" },
         { "find": "^(And|But|Or|So|Also|Then|Now|Well),?\\s+", "flags": "gim", "replace": "" },
         { "find": "^[!.,;:?]+\\s*but\\s+", "flags": "gim", "replace": "" },
         { "find": "^[!.,;:?]+\\s*and\\s+", "flags": "gim", "replace": "" },
+        { "find": "^[!.,;:?]+\\s*[a-z]{1,4}[.,]?\\s*", "flags": "gim", "replace": "" },
         { "find": "^,\\s*", "flags": "gim", "replace": "" },
         { "find": "^[.!?]+\\s*", "flags": "gim", "replace": "" },
         { "find": "^-+\\s*", "flags": "gim", "replace": "" },
         { "find": "^:\\s*", "flags": "gim", "replace": "" },
         { "find": "^I'm but\\s+", "flags": "gim", "replace": "" },
-        { "find": "^I'm\\s+$", "flags": "gim", "replace": "" }
+        { "find": "^I'm\\s+$", "flags": "gim", "replace": "" },
+        { "find": "^I would\\s+$", "flags": "gim", "replace": "" },
+        { "find": "^possibly,?\\s*", "flags": "gim", "replace": "" }
       ]
     },
     {
@@ -774,6 +786,16 @@
       "category": "formatting",
       "priority": 87,
       "patterns": [
+        { "find": "\\bgo ead and\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bgo ead\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bead and\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bI was wondering possibly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwas wondering possibly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bwondering possibly,?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bpossibly,? be\\.?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\b, be\\.\\s*", "flags": "gi", "replace": ". " },
+        { "find": "\\bso in advance[!.,]?\\s*", "flags": "gi", "replace": "" },
+        { "find": "\\bin advance[!.,]?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bhelp me out\\??\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bhelp out\\??\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bto make this[^.!?]*as (cool|good|nice|great) as possible,?\\s*", "flags": "gi", "replace": "" },
@@ -811,12 +833,16 @@
         { "find": "\\bI think,\\s*", "flags": "gi", "replace": "" },
         { "find": "\\betc,\\s*$", "flags": "gim", "replace": "" },
         { "find": "\\betc,$", "flags": "gim", "replace": "" },
+        { "find": "\\bwrite code:\\s*I would\\s+", "flags": "gi", "replace": "" },
+        { "find": "\\bwrite code:\\s*So\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bwrite code:\\s*write\\s+", "flags": "gi", "replace": "Write " },
         { "find": "\\bwrite code:\\s*create\\s+", "flags": "gi", "replace": "Create " },
         { "find": "\\bwrite code:\\s*build\\s+", "flags": "gi", "replace": "Build " },
         { "find": "\\bwrite code:\\s*make\\s+", "flags": "gi", "replace": "Make " },
         { "find": "\\bwrite code:\\s*$", "flags": "gim", "replace": "" },
         { "find": "^write code:\\s*", "flags": "gim", "replace": "" },
+        { "find": "\\ba web scraper\\?+\\s*", "flags": "gi", "replace": "a web scraper. " },
+        { "find": "\\ba Python script\\?+\\s*", "flags": "gi", "replace": "a Python script. " },
         { "find": "\\bInclude some\\s+", "flags": "gi", "replace": "Include " },
         { "find": "\\bInclude a\\s+", "flags": "gi", "replace": "Include " },
         { "find": "\\bsome buttons\\b", "flags": "gi", "replace": "buttons" },
