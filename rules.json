@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updated": "2025-12-06",
   "presets": {
     "none": {
@@ -32,6 +32,12 @@
       "icon": "[5]",
       "enabledCategories": ["formatting", "fluff", "redundancy", "verbosity", "qualifiers", "structure", "compression", "security"]
     },
+    "crafr": {
+      "name": "CRAFR",
+      "description": "Structures output with Context/Role/Action/Format/Rules labels",
+      "icon": "[S]",
+      "enabledCategories": ["formatting", "fluff", "redundancy", "verbosity", "qualifiers", "structure", "security", "structuring"]
+    },
     "custom": {
       "name": "Custom",
       "description": "Your own rule configuration",
@@ -48,6 +54,7 @@
     "formatting": { "name": "Formatting", "icon": "FT", "description": "Cleans up whitespace/punctuation" },
     "compression": { "name": "Deep Compression", "icon": "DC", "description": "Aggressive token reduction" },
     "security": { "name": "Security (DLP)", "icon": "SEC", "description": "Redacts sensitive data" },
+    "structuring": { "name": "CRAFR Structuring", "icon": "CR", "description": "Tags content with CRAFR labels" },
     "custom": { "name": "Custom Rules", "icon": "CU", "description": "Your personal rules" }
   },
   "rules": [
@@ -1035,6 +1042,128 @@
         { "find": "\\bin terms of,?\\s*", "flags": "gi", "replace": "" },
         { "find": "\\bwith respect to\\s+", "flags": "gi", "replace": "" },
         { "find": "\\bin relation to\\s+", "flags": "gi", "replace": "" }
+      ]
+    },
+    {
+      "id": "crafr-extract-role",
+      "name": "Extract Role/Persona",
+      "description": "Detects and labels role/persona specifications",
+      "explanation": "Identifies when user specifies a role for the AI to adopt.",
+      "example": { "before": "As a Python developer, write code", "after": "[Role/Persona] Python developer\nWrite code" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 200,
+      "patterns": [
+        { "find": "\\b[Aa]s an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "g", "replace": "[Role/Persona] $1\n" },
+        { "find": "\\b[Aa]ct(?:ing)? as an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "gi", "replace": "[Role/Persona] $1\n" },
+        { "find": "\\b[Yy]ou are an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "g", "replace": "[Role/Persona] $1\n" },
+        { "find": "\\b[Pp]retend you('re| are) an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "g", "replace": "[Role/Persona] $2\n" },
+        { "find": "\\b[Bb]e an? ([A-Za-z][A-Za-z\\s]{2,30}(?:developer|engineer|expert|specialist|analyst|designer|writer|consultant|architect|manager|scientist|researcher|professional|programmer|coder)),?\\s*", "flags": "g", "replace": "[Role/Persona] $1\n" }
+      ]
+    },
+    {
+      "id": "crafr-extract-action",
+      "name": "Extract Action/Task",
+      "description": "Detects and labels main action/task requests",
+      "explanation": "Identifies the primary task being requested.",
+      "example": { "before": "Write a web scraper", "after": "[Action/Task] Write a web scraper" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 201,
+      "patterns": [
+        { "find": "^([Ww]rite|[Cc]reate|[Bb]uild|[Dd]evelop|[Ii]mplement|[Dd]esign|[Gg]enerate|[Mm]ake)\\s+(?:a |an |the )?([A-Za-z][A-Za-z0-9\\s\\-]{3,50}?)(?=\\.|,|\\n|$|\\s+(?:that|which|for|using|with|in))", "flags": "gm", "replace": "[Action/Task] $1 $2" },
+        { "find": "^([Ee]xplain|[Ss]ummarize|[Aa]nalyze|[Rr]eview|[Dd]escribe|[Ll]ist|[Cc]ompare|[Oo]utline)\\s+(?:the |a |an )?([A-Za-z][A-Za-z0-9\\s\\-]{3,50}?)(?=\\.|,|\\n|$)", "flags": "gm", "replace": "[Action/Task] $1 $2" },
+        { "find": "^([Ff]ix|[Dd]ebug|[Rr]efactor|[Oo]ptimize|[Tt]est|[Vv]alidate|[Cc]heck)\\s+(?:the |a |an |this |my )?([A-Za-z][A-Za-z0-9\\s\\-]{3,50}?)(?=\\.|,|\\n|$)", "flags": "gm", "replace": "[Action/Task] $1 $2" },
+        { "find": "^([Cc]onvert|[Tt]ransform|[Mm]igrate|[Pp]ort|[Tt]ranslate)\\s+(?:the |a |an |this |my )?([A-Za-z][A-Za-z0-9\\s\\-]{3,50}?)(?=\\.|,|\\n|$|\\s+(?:to|into|from))", "flags": "gm", "replace": "[Action/Task] $1 $2" }
+      ]
+    },
+    {
+      "id": "crafr-extract-format",
+      "name": "Extract Format",
+      "description": "Detects and labels format specifications",
+      "explanation": "Identifies requested output format.",
+      "example": { "before": "using bullet points", "after": "[Format] bullet points" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 202,
+      "patterns": [
+        { "find": "\\b[Uu]se (bullet points|numbered list|markdown|JSON|XML|YAML|CSV|table|code blocks?|plain text)\\b\\.?\\s*", "flags": "g", "replace": "\n[Format] $1\n" },
+        { "find": "\\b[Ff]ormat(?:ted)? (?:as |in |using )?(bullet points|numbered list|markdown|JSON|XML|YAML|CSV|table|code blocks?|plain text)\\b\\.?\\s*", "flags": "gi", "replace": "\n[Format] $1\n" },
+        { "find": "\\b[Ii]n (bullet points|numbered list|markdown|JSON|XML|YAML|CSV|table format|code blocks?|plain text)\\b\\.?\\s*", "flags": "g", "replace": "\n[Format] $1\n" },
+        { "find": "\\b[Aa]s (?:a )?(bullet list|numbered list|JSON|XML|YAML|CSV|table|code block)\\b\\.?\\s*", "flags": "g", "replace": "\n[Format] $1\n" },
+        { "find": "\\b[Oo]utput (?:as |in )?(bullet points|numbered list|markdown|JSON|XML|YAML|CSV|table|code)\\b\\.?\\s*", "flags": "gi", "replace": "\n[Format] $1\n" }
+      ]
+    },
+    {
+      "id": "crafr-extract-constraints",
+      "name": "Extract Rules/Constraints",
+      "description": "Detects and labels constraints and rules",
+      "explanation": "Identifies limits, requirements, and restrictions.",
+      "example": { "before": "Keep it under 50 lines", "after": "[Rules/Constraints] Under 50 lines" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 203,
+      "patterns": [
+        { "find": "\\b[Kk]eep it (under|below|within|around|about) (\\d+)\\s*(lines?|words?|characters?|sentences?|paragraphs?|tokens?|pages?)\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] Under $2 $3\n" },
+        { "find": "\\b[Mm]ax(?:imum)? (?:of )?(\\d+)\\s*(lines?|words?|characters?|sentences?|paragraphs?|tokens?|pages?)\\.?\\s*", "flags": "gi", "replace": "\n[Rules/Constraints] Max $1 $2\n" },
+        { "find": "\\b[Ll]imit(?:ed)? to (\\d+)\\s*(lines?|words?|characters?|sentences?|paragraphs?|tokens?|pages?)\\.?\\s*", "flags": "gi", "replace": "\n[Rules/Constraints] Limit $1 $2\n" },
+        { "find": "\\b[Nn]o more than (\\d+)\\s*(lines?|words?|characters?|sentences?|paragraphs?|tokens?|pages?)\\.?\\s*", "flags": "gi", "replace": "\n[Rules/Constraints] Max $1 $2\n" },
+        { "find": "\\b[Kk]eep it (short|brief|concise|simple)\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] Keep $1\n" },
+        { "find": "\\b[Aa]void(?:ing)? ([A-Za-z][A-Za-z\\s]{2,30})\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] Avoid $1\n" },
+        { "find": "\\b[Dd]on't (?:use |include |add )([A-Za-z][A-Za-z\\s]{2,30})\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] No $1\n" },
+        { "find": "\\b[Mm]ust (?:be |have |include )([A-Za-z][A-Za-z\\s]{2,30})\\.?\\s*", "flags": "g", "replace": "\n[Rules/Constraints] Must $1\n" }
+      ]
+    },
+    {
+      "id": "crafr-extract-context",
+      "name": "Extract Context",
+      "description": "Detects and labels context/background information",
+      "explanation": "Identifies background context provided.",
+      "example": { "before": "For a React project", "after": "[Context] React project" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 204,
+      "patterns": [
+        { "find": "\\b[Ff]or (?:a |an |my |the |this )?([A-Za-z][A-Za-z0-9\\s\\-]{3,40}(?:project|application|app|website|site|system|platform|tool|service|API|database|script|program|codebase)),?\\s*", "flags": "g", "replace": "\n[Context] $1\n" },
+        { "find": "\\b[Ii]n (?:a |an |my |the |this )?([A-Za-z][A-Za-z0-9\\s\\-]{3,40}(?:project|application|app|website|site|environment|context|scenario|situation)),?\\s*", "flags": "g", "replace": "\n[Context] $1\n" },
+        { "find": "\\b[Uu]sing ([A-Za-z][A-Za-z0-9\\.\\s\\-]{2,30}(?:framework|library|language|stack|version|v\\d+)),?\\s*", "flags": "g", "replace": "\n[Context] Using $1\n" },
+        { "find": "\\b[Ww]ith ([A-Za-z][A-Za-z0-9\\.\\s\\-]{2,20}) (?:framework|library|and|stack),?\\s*", "flags": "g", "replace": "\n[Context] With $1\n" },
+        { "find": "\\b[Bb]ackground:?\\s+([^\\.\\n]{10,100})\\.?\\s*", "flags": "gi", "replace": "\n[Context] $1\n" },
+        { "find": "\\b[Cc]ontext:?\\s+([^\\.\\n]{10,100})\\.?\\s*", "flags": "gi", "replace": "\n[Context] $1\n" }
+      ]
+    },
+    {
+      "id": "crafr-extract-examples",
+      "name": "Extract Examples",
+      "description": "Detects and labels examples provided",
+      "explanation": "Identifies examples or samples provided by user.",
+      "example": { "before": "For example: print('hello')", "after": "[Examples] print('hello')" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 205,
+      "patterns": [
+        { "find": "\\b[Ff]or example:?\\s+([^\\.\\n]{5,200})\\.?\\s*", "flags": "g", "replace": "\n[Examples] $1\n" },
+        { "find": "\\b[Ee]\\.g\\.?:?\\s+([^\\.\\n]{5,100})\\.?\\s*", "flags": "g", "replace": "\n[Examples] $1\n" },
+        { "find": "\\b[Ll]ike this:?\\s+([^\\.\\n]{5,200})\\.?\\s*", "flags": "gi", "replace": "\n[Examples] $1\n" },
+        { "find": "\\b[Ss]uch as:?\\s+([^\\.\\n]{5,100})\\.?\\s*", "flags": "g", "replace": "\n[Examples] $1\n" },
+        { "find": "\\b[Ss]ample:?\\s+([^\\.\\n]{5,200})\\.?\\s*", "flags": "gi", "replace": "\n[Examples] $1\n" },
+        { "find": "\\b[Hh]ere'?s? (?:an |a )?example:?\\s+([^\\.\\n]{5,200})\\.?\\s*", "flags": "g", "replace": "\n[Examples] $1\n" }
+      ]
+    },
+    {
+      "id": "crafr-cleanup",
+      "name": "CRAFR Cleanup",
+      "description": "Cleans up CRAFR formatting",
+      "explanation": "Normalizes spacing and removes duplicate labels.",
+      "example": { "before": "[Role/Persona] dev\n\n\n[Action/Task]", "after": "[Role/Persona] dev\n[Action/Task]" },
+      "enabled": true,
+      "category": "structuring",
+      "priority": 210,
+      "patterns": [
+        { "find": "\\n{3,}", "flags": "g", "replace": "\n\n" },
+        { "find": "^\\n+", "flags": "g", "replace": "" },
+        { "find": "\\n+$", "flags": "g", "replace": "" },
+        { "find": "(\\[(?:Role\\/Persona|Action\\/Task|Format|Rules\\/Constraints|Context|Examples)\\])\\s*\\n\\s*\\1", "flags": "g", "replace": "$1" }
       ]
     }
   ]
